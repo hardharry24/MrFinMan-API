@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mr.FinMan Server</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"></link>
+</head>
+
+<body>
+	<div class="container" style="margin-top:20px">
+		<div class="jumbotron">
+			<center>
+				<h1>WELCOME TO MR FINMAN</h1>
+				<h3>SERVER</h3>
+				<br/>
+				<p id="time">
+					
+				</p>
+			</center>
+		</div>
+	</div>
+
+	
+</body>
+<footer>
+	<center>Copyright Mr.FinMan 2018</center>
+</footer>
+</html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function 	() {
+		timer_function();
+	});
+
+	function timer_function()
+	{
+			var refresh=1000; // Refresh rate in milli seconds
+			mytime=setTimeout('AjaxFunction();',refresh)
+	}
+
+
+	function AjaxFunction()
+    {
+      var httpxml;
+      try
+      {
+       // Firefox, Opera 8.0+, Safari
+        httpxml=new XMLHttpRequest();
+      }
+      catch (e)
+    {
+  // Internet Explorer
+		  try
+   			 		{
+   				 httpxml=new ActiveXObject("Msxml2.XMLHTTP");
+    				}
+  			catch (e)
+    				{
+    			try
+      		{
+      		httpxml=new ActiveXObject("Microsoft.XMLHTTP");
+     		 }
+    			catch (e)
+      		{
+      		alert("Your browser does not support AJAX!");
+      		return false;
+      		}
+    		}
+    }
+    function stateck() 
+    {
+    if(httpxml.readyState==4)
+      {
+        document.getElementById("time").innerHTML=httpxml.responseText;
+      }
+    }
+	var url="ajax-server-clock-demock.php";
+     url=url+"?sid="+Math.random();
+     httpxml.onreadystatechange=stateck;
+     httpxml.open("GET",url,true);
+     httpxml.send(null);
+     tt=timer_function();
+  }
+
+///////////////////////////
+function timer_function(){
+var refresh=1000; // Refresh rate in milli seconds
+mytime=setTimeout('AjaxFunction();',refresh)
+}
+
+</script>
